@@ -1,11 +1,11 @@
 import Search from "./Search";
-import "./App.css";
+import "./styles/App.css";
 
 function App() {
   return (
-    <>
-      <h1>Vite + React</h1>
-    </>
+    <div className="weather-app">
+      <Search />
+    </div>
   );
 }
 

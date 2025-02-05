@@ -20,7 +20,7 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (city) {
-      const apiKey = "3c9b157d324o427adbae47ft0a08477e";
+      const apiKey = import.meta.env.VITE_API_KEY;
       const url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
       axios.get(url).then((res) => {
         console.log(res.data);
@@ -44,9 +44,17 @@ const Search = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input type="seacrh" onChange={handleInputChange} value={city} />
-        <input type="submit" />
+      <form onSubmit={handleSubmit} id="search-form">
+        <input
+          type="seacrh"
+          placeholder="Enter a city.."
+          required
+          className="search-input"
+          id="search-input"
+          onChange={handleInputChange}
+          value={city}
+        />
+        <input type="submit" value="Search" className="search-button" />
       </form>
       {responseStatus && (
         <div>
