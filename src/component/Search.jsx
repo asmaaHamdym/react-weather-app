@@ -4,6 +4,7 @@ import axios from "axios";
 const Search = () => {
   const [city, setCity] = useState("");
   const [responseStatus, setResponseStatus] = useState(false);
+  const [forcastDays, setForcastDays] = useState([]);
   const [weatherData, setWeatherData] = useState({
     temperature: "",
     description: "",
@@ -17,6 +18,7 @@ const Search = () => {
       setCity(e.target.value);
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (city) {
@@ -27,14 +29,7 @@ const Search = () => {
         if (res.status === 200) {
           setResponseStatus(true);
           setCity(res.data.city);
-          setWeatherData({
-            ...weatherData,
-            temperature: res.data.daily[0].temperature.day,
-            description: res.data.daily[0].condition.description,
-            humidity: res.data.daily[0].temperature.humidity,
-            wind: res.data.daily[0].wind,
-            icon: res.data.daily[0].condition.icon_url,
-          });
+          setForcastDays(res.data.daily.slice(0, 5));
         }
       });
     } else {
@@ -56,18 +51,7 @@ const Search = () => {
         />
         <input type="submit" value="Search" className="search-button" />
       </form>
-      {responseStatus && (
-        <div>
-          <h1>Weather in {city}: </h1>
-          <p>Temprature: {weatherData.temperature} °C</p>
-          <p>Description: {weatherData.description}</p>
-          <p>Humidity: {weatherData.humidity}%</p>
-          <p>Wind: {weatherData.wind.speed}km/h</p>
-          <p>
-            <img src={weatherData.icon} />
-          </p>
-        </div>
-      )}
+      {responseStatus && displayForecast()}
     </>
   );
 };
