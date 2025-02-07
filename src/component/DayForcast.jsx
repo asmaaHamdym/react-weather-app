@@ -1,4 +1,4 @@
-const Header = ({
+const DayForcast = ({
   city,
   country,
   date,
@@ -39,4 +39,4 @@ const Header = ({
   );
 };
 
-expoert default Header;
+export default DayForcast;

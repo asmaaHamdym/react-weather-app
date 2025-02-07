@@ -144,3 +144,10 @@ footer {
 .weather-forecast-temperature {
   padding: 0 10px;
 }
+
+#search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+}
