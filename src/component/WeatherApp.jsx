@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import DayForcast from "./DayForcast";
-// import FiveDayForcast from "./FiveDayForcast";
+import FiveDayForcast from "./FiveDayForcast";
 import formatDate from "./formatTimestamp";
 
 const WeatherApp = () => {
@@ -26,7 +26,7 @@ const WeatherApp = () => {
     const apiKey = import.meta.env.VITE_API_KEY;
     const url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
     axios.get(url).then((res) => {
-      console.log(res);
+      console.log(res.data);
       if (res.data.status === "not_found") {
         setIsLoaded(false);
         setError(true);
@@ -72,18 +72,23 @@ const WeatherApp = () => {
         <input type="submit" value="Search" className="search-button" />
       </form>
       {isLoaded && (
-        <DayForcast
-          city={city}
-          country={country}
-          date={`${weatherData.date.day}, ${weatherData.date.hours}:${weatherData.date.minutes}`}
-          description={weatherData.description}
-          humidity={weatherData.humidity}
-          wind={weatherData.wind}
-          iconUrl={weatherData.icon}
-          temprature={Math.round(weatherData.temperature)}
-        />
+        <>
+          <DayForcast
+            city={city}
+            country={country}
+            date={`${weatherData.date.day}, ${weatherData.date.hours}:${weatherData.date.minutes}`}
+            description={weatherData.description}
+            humidity={weatherData.humidity}
+            wind={weatherData.wind}
+            iconUrl={weatherData.icon}
+            temprature={Math.round(weatherData.temperature)}
+          />
+          <div id="forecast">
+            <FiveDayForcast city={city} />
+          </div>
+        </>
       )}
-      {error && <h1>Can&apos;t find this city! 🤷‍♀️</h1>}
+      {error && <h1 className="errorDisplay">Can&apos;t find this city! 🤷‍♀️</h1>}
     </>
   );
 };
