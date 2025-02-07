@@ -34,6 +34,7 @@ const WeatherApp = () => {
         return;
       }
       if (res.status === 200) {
+        setError(false);
         setIsLoaded(true);
         setCity(res.data.city);
         setCountry(res.data.country);
