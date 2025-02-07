@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import DayForcast from "./DayForcast";
-import FiveDayForcast from "./FiveDayForcast";
-import { formatTimestamp } from "./formatTimestamp";
+// import FiveDayForcast from "./FiveDayForcast";
+import formatDate from "./formatTimestamp";
 
 const WeatherApp = () => {
   const [city, setCity] = useState("");
@@ -26,8 +26,12 @@ const WeatherApp = () => {
     const apiKey = import.meta.env.VITE_API_KEY;
     const url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
     axios.get(url).then((res) => {
-      console.log(res.data);
-      console.log(new Date(res.data.time * 1000));
+      console.log(res);
+      if (res.data.status === "not_found") {
+        setIsLoaded(false);
+        setError(true);
+        return;
+      }
       if (res.status === 200) {
         setIsLoaded(true);
         setCity(res.data.city);
@@ -39,11 +43,8 @@ const WeatherApp = () => {
           wind: res.data.wind.speed,
           icon: res.data.condition.icon_url,
           temperature: res.data.temperature.current,
-          date: formatTimestamp(res.data.time),
+          date: formatDate(res.data.time),
         });
-      } else {
-        setIsLoaded(false);
-        setError(true);
       }
     });
   };
@@ -74,7 +75,7 @@ const WeatherApp = () => {
         <DayForcast
           city={city}
           country={country}
-          date={`${weatherData.date.dayNameShort}, ${weatherData.date.time}`}
+          date={`${weatherData.date.day}, ${weatherData.date.hours}:${weatherData.date.minutes}`}
           description={weatherData.description}
           humidity={weatherData.humidity}
           wind={weatherData.wind}

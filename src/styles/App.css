@@ -8,6 +8,10 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  text-align: center;
+}
+
 header {
   border-bottom: 1px solid #f9f7fe;
   padding-bottom: 30px;
@@ -150,4 +154,82 @@ footer {
   justify-content: center;
   align-items: center;
   margin: 40px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .weather-app {
+    padding: 20px;
+  }
+
+  .search-input {
+    padding: 15px;
+  }
+
+  .search-button {
+    padding: 15px;
+  }
+
+  .current-temperature {
+    font-size: 36px;
+  }
+
+  .current-city {
+    font-size: 28px;
+  }
+
+  .current-details {
+    font-size: 14px;
+  }
+
+  .current-temperature-icon {
+    width: 80px;
+  }
+
+  .current-temperature-value {
+    font-size: 60px;
+  }
+
+  .current-temperature-unit {
+    font-size: 20px;
+  }
+
+  #forecast {
+    flex-wrap: wrap;
+  }
+
+  .weather-forecast-col {
+    flex-direction: row;
+    margin: 10px;
+  }
+
+  .weather-forecast-date {
+    font-size: 14px;
+  }
+
+  .weather-forecast-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .weather-forecast-temperatures {
+    font-size: 14px;
+  }
+
+  .weather-forecast-temperature {
+    padding: 0 5px;
+  }
+
+  #search-form {
+    flex-direction: column;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .search-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
 }
