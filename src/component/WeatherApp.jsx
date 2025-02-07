@@ -3,6 +3,7 @@ import axios from "axios";
 import DayForcast from "./DayForcast";
 import FiveDayForcast from "./FiveDayForcast";
 import formatDate from "./formatTimestamp";
+import Footer from "./Footer";
 
 const WeatherApp = () => {
   const [city, setCity] = useState("");
@@ -89,6 +90,7 @@ const WeatherApp = () => {
         </>
       )}
       {error && <h1 className="errorDisplay">Can&apos;t find this city! 🤷‍♀️</h1>}
+      <Footer />
     </>
   );
 };
